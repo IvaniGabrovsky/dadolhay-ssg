@@ -1,0 +1,33 @@
+{
+  "name": "dadolhay-ssg",
+  "version": "0.0.1",
+  "description": "OSD600-NSA Release 0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dadolhay/dadolhay-ssg.git"
+  },
+  "author": "Denes Adam Dolhay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dadolhay/dadolhay-ssg/issues"
+  },
+  "homepage": "https://github.com/dadolhay/dadolhay-ssg#readme",
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.7.1"
+  },
+  "engines": {
+    "node": "^16 || ^18"
+  },
+  "dependencies": {
+    "xmldom": "^0.6.0"
+  }
+}
