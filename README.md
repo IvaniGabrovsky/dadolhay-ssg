@@ -14,11 +14,12 @@ Static site generator for OSD600-NSA
 
 ## Options
 
-| Long | Short | Description |
-| --help | -h | Displays usage information |
-| --input | -i | Input file or folder. In case of folder will generate recursively, keeping file structure |
-| --output | -o | Puts generated file(s) into directory **Original directory is destroyed** |
-| --version | -v | Print version info and exit |
+| Long      | Short | Description                                                                               |
+| --------- | ----- | ----------------------------------------------------------------------------------------- |
+| --help    | -h    | Displays usage information                                                                |
+| --input   | -i    | Input file or folder. In case of folder will generate recursively, keeping file structure |
+| --output  | -o    | Puts generated file(s) into directory **Original directory is destroyed**                 |
+| --version | -v    | Print version info and exit                                                               |
 
 ## Examples
 
