@@ -5,19 +5,46 @@
 
 const { DOMImplementation, XMLSerializer } = require('xmldom');
 
-const createDom = () => {
+const addBaseStructure = (document, { title }) => {
+  const html = document.getElementsByTagName('html').item(0);
+  html.setAttribute('lang', 'en');
+
+  const head = document.createElement('head');
+  html.appendChild(head);
+
+  const body = document.createElement('body');
+  html.appendChild(body);
+
+  const meta1 = document.createElement('meta');
+  meta1.setAttribute('charset', 'utf-8');
+  head.appendChild(meta1);
+
+  const meta2 = document.createElement('meta');
+  meta2.setAttribute('name', 'viewport');
+  meta2.setAttribute('content', 'width=device-width');
+  meta2.setAttribute('initial-scale', 1);
+  head.appendChild(meta2);
+
+  const titleEl = document.createElement('title');
+  titleEl.textContent = title;
+  head.appendChild(titleEl);
+};
+
+const createDocument = config => {
   const DOMImplementationInstance = new DOMImplementation();
   // This will dictate the docType. For html5 we only need <!DOCTYPE html>
   const docType = DOMImplementationInstance.createDocumentType('html');
-  const dom = DOMImplementationInstance.createDocument(
+  const document = DOMImplementationInstance.createDocument(
     null, // With html5, xmlns is implicite
     'html', // The root node type
     docType
   );
 
-  return dom;
+  addBaseStructure(document, config);
+
+  return document;
 };
 
 const serializeDom = dom => new XMLSerializer().serializeToString(dom);
 
-module.exports = { createDom, serializeDom };
+module.exports = { createDocument, serializeDom };
