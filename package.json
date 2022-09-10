@@ -28,6 +28,7 @@
     "node": "^16 || ^18"
   },
   "dependencies": {
+    "glob-promise": "^5.0.0",
     "xmldom": "^0.6.0"
   }
 }

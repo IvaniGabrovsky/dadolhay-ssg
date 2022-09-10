@@ -25,19 +25,20 @@ const addBaseStructure = (document, { title }) => {
   meta2.setAttribute('initial-scale', 1);
   head.appendChild(meta2);
 
-  const titleEl = document.createElement('title');
-  titleEl.textContent = title;
-  head.appendChild(titleEl);
+  if (title) {
+    const titleEl = document.createElement('title');
+    titleEl.textContent = title;
+    head.appendChild(titleEl);
+  }
 };
 
 const createDocument = config => {
   const DOMImplementationInstance = new DOMImplementation();
-  // This will dictate the docType. For html5 we only need <!DOCTYPE html>
-  const docType = DOMImplementationInstance.createDocumentType('html');
   const document = DOMImplementationInstance.createDocument(
     null, // With html5, xmlns is implicite
     'html', // The root node type
-    docType
+    // This will dictate the docType. For html5 we only need <!DOCTYPE html>
+    DOMImplementationInstance.createDocumentType('html')
   );
 
   addBaseStructure(document, config);
