@@ -2,6 +2,10 @@ const path = require('path');
 const fs = require('fs');
 const glob = require('glob-promise');
 
+const destroypath = dir => {
+  if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true });
+};
+
 const generateFileListFromPath = ({ inputPath, outputPath }) => {
   if (!fs.existsSync(inputPath)) return [];
 
@@ -11,7 +15,9 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
     return [
       {
         input: path.resolve(inputPath),
-        output: path.resolve(path.join(outputPath, filename)),
+        output: path.resolve(
+          path.join(outputPath, filename.replace(/\.txt$/, '.html'))
+        ),
       },
     ];
   }
@@ -26,10 +32,18 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
       // relative (compared to the path provided by the user) path of the input
       output: path.join(
         path.resolve(outputPath),
-        path.relative(inputPath, item)
+        path.relative(inputPath, item.replace(/\.txt$/, '.html'))
       ),
     };
   });
 };
 
-module.exports = { generateFileListFromPath };
+const writeFile = ({ output, content }) => {
+  // Create directory if not already done
+  const dir = path.dirname(output);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
+  fs.writeFileSync(output, content);
+};
+
+module.exports = { destroypath, generateFileListFromPath, writeFile };

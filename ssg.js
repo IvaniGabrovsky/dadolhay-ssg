@@ -3,7 +3,11 @@
 const { parseFileToBlocks } = require('./src/utils/textParser');
 const { createDocument, serializeDom } = require('./src/utils/dom');
 const { parseProcArgs, printArgsUsage } = require('./src/utils/args');
-const { generateFileListFromPath } = require('./src/utils/fileList');
+const {
+  destroypath,
+  generateFileListFromPath,
+  writeFile,
+} = require('./src/utils/file');
 const options = require('./src/constants/options');
 const packageJson = require('./package.json');
 
@@ -42,9 +46,14 @@ if (!config.parsedParams.input) {
   process.exit(1);
 }
 
+const outputDirPath = config.parsedParams.output || DEFAULT_RESULT_FOLDER;
+
+// Destroy outpud dir if exists
+destroypath(outputDirPath);
+
 const toProcessArr = generateFileListFromPath({
   inputPath: config.parsedParams.input,
-  outputPath: config.parsedParams.outout || DEFAULT_RESULT_FOLDER,
+  outputPath: outputDirPath,
 });
 
 toProcessArr.forEach(({ input, output }) => {
@@ -55,5 +64,6 @@ toProcessArr.forEach(({ input, output }) => {
     ...(blocks[0].type === 'title' && { title: blocks[0].content[0] }),
     blocks,
   });
-  console.log(serializeDom(dom));
+
+  writeFile({ output, content: serializeDom(dom) });
 });
