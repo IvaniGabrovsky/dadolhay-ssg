@@ -48,8 +48,12 @@ const toProcessArr = generateFileListFromPath({
 });
 
 toProcessArr.forEach(({ input, output }) => {
-  parseFileToBlocks(input);
-  const dom = createDocument({ title: 'Foobar' });
-});
+  const blocks = parseFileToBlocks(input);
 
-// console.log(serializeDom(dom));
+  const dom = createDocument({
+    // This will will either spread false (does nothing) or the object with title
+    ...(blocks[0].type === 'title' && { title: blocks[0].content[0] }),
+    blocks,
+  });
+  console.log(serializeDom(dom));
+});

@@ -32,6 +32,28 @@ const addBaseStructure = (document, { title }) => {
   }
 };
 
+const addBodyContent = (document, { blocks }) => {
+  const body = document.getElementsByTagName('body').item(0);
+
+  // Loop through all the blocks and add them into the XML document
+  blocks.forEach(({ type, content }) => {
+    const containerEl = document.createElement(type === 'title' ? 'h1' : 'p');
+    body.appendChild(containerEl);
+
+    // Add each line one by one
+    content.forEach((line, index) => {
+      if (index) {
+        const brEl = document.createElement('br');
+        containerEl.appendChild(brEl);
+      }
+
+      const textNode = document.createTextNode(line);
+      containerEl.appendChild(textNode);
+    });
+    // el.textContent = content;
+  });
+};
+
 const createDocument = config => {
   const DOMImplementationInstance = new DOMImplementation();
   const document = DOMImplementationInstance.createDocument(
@@ -42,6 +64,7 @@ const createDocument = config => {
   );
 
   addBaseStructure(document, config);
+  addBodyContent(document, config);
 
   return document;
 };
