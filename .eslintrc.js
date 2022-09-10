@@ -10,6 +10,7 @@ module.exports = {
     'no-plusplus': ['off'],
     'arrow-body-style': ['off'],
     'new-cap': ['off'],
+    'no-continue': ['off'],
   },
   env: { es2022: true, node: true },
 };
