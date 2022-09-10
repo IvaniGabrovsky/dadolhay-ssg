@@ -1,5 +1,5 @@
 /**
- * This module is responsible for parsing the arguments given to this script
+ * This Fn is responsible for parsing the arguments given to this script
  *
  * LIMITATIONS
  * - It loses the order of the switches (but not the files)
@@ -63,4 +63,30 @@ const parseProcArgs = ({ options }) => {
   return { selfPath, freeFloatingParams, parsedParams };
 };
 
-module.exports = { parseProcArgs };
+/**
+ * This Fn is responsible for printing the usage information
+ */
+const printArgsUsage = ({ options }) => {
+  const { shortPad, longPad } = Object.values(options).reduce(
+    (acc, { short, long }) => ({
+      shortPad: Math.max(acc.shortPad, short?.length ?? 0),
+      longPad: Math.max(acc.longPad, long?.length ?? 0),
+    }),
+    { shortPad: 0, longPad: 0 }
+  );
+
+  // eslint-disable-next-line no-console
+  console.log('Usage:');
+
+  Object.keys(options)
+    .sort()
+    .forEach(key => {
+      const { short, long, description } = options[key];
+      const shortPart = (short ? `-${short}` : '').padStart(shortPad + 1, ' ');
+      const longPart = (long ? `--${long}` : '').padStart(longPad + 2, ' ');
+      // eslint-disable-next-line no-console
+      console.log(`    ${shortPart}  ${longPart}    ${description}`);
+    });
+};
+
+module.exports = { parseProcArgs, printArgsUsage };
