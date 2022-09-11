@@ -10,7 +10,7 @@ Static site generator for OSD600-NSA
 ## Usage
 
 - Run `yarn install` first
-- execute `./ssg.js [options]`
+- execute `./ssg.js [options]` or on windows you may need to prefix it with the interpreter, like `node ./ssg.js [options]`
 
 ## Options
 
@@ -23,9 +23,9 @@ Static site generator for OSD600-NSA
 
 ## Examples
 
-- `./ssg.js --input ./inputs/`
-- `./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/`
-- `./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder`
+- `node ./ssg.js --input ./inputs/`
+- `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/`
+- `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder`
 
 ## Optional features developed:
 
