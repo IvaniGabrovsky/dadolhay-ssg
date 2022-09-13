@@ -11,6 +11,12 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
 
   if (fs.lstatSync(inputPath).isFile()) {
     // It's a file
+
+    if (!inputPath.endsWith('.txt'))
+      throw new Error(
+        'When specifying a single file, it needs to be a txt file'
+      );
+
     const filename = path.basename(inputPath);
     return [
       {

@@ -48,15 +48,30 @@ if (!config.parsedParams.input) {
 
 const outputDirPath = config.parsedParams.output || DEFAULT_RESULT_FOLDER;
 
-// Destroy outpud dir if exists
+// Destroy output dir if exists
 destroypath(outputDirPath);
 
-const toProcessArr = generateFileListFromPath({
-  inputPath: config.parsedParams.input,
-  outputPath: outputDirPath,
-});
+let toProcessArr;
+try {
+  toProcessArr = generateFileListFromPath({
+    inputPath: config.parsedParams.input,
+    outputPath: outputDirPath,
+  });
+} catch (e) {
+  // eslint-disable-next-line no-console
+  console.log(e.message);
+  process.exit(1);
+}
+
+if (!toProcessArr.length) {
+  // eslint-disable-next-line no-console
+  console.log('No files to process');
+  process.exit(1);
+}
 
 toProcessArr.forEach(({ input, output }) => {
+  // eslint-disable-next-line no-console
+  console.log(`Generating: ${output}`);
   const blocks = parseFileToBlocks(input);
 
   const dom = createDocument({
