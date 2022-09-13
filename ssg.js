@@ -48,37 +48,32 @@ if (!config.parsedParams.input) {
 
 const outputDirPath = config.parsedParams.output || DEFAULT_RESULT_FOLDER;
 
-// Destroy output dir if exists
-destroypath(outputDirPath);
-
-let toProcessArr;
 try {
-  toProcessArr = generateFileListFromPath({
+  // Destroy output dir if exists
+  destroypath(outputDirPath);
+
+  const toProcessArr = generateFileListFromPath({
     inputPath: config.parsedParams.input,
     outputPath: outputDirPath,
+  });
+
+  if (!toProcessArr.length) throw new Error('No txt files to process');
+
+  toProcessArr.forEach(({ input, output }) => {
+    // eslint-disable-next-line no-console
+    console.log(`Generating: ${output}`);
+    const blocks = parseFileToBlocks(input);
+
+    const dom = createDocument({
+      // This will will either spread false (does nothing) or the object with title
+      ...(blocks[0].type === 'title' && { title: blocks[0].content[0] }),
+      blocks,
+    });
+
+    writeFile({ output, content: serializeDom(dom) });
   });
 } catch (e) {
   // eslint-disable-next-line no-console
   console.log(e.message);
   process.exit(1);
 }
-
-if (!toProcessArr.length) {
-  // eslint-disable-next-line no-console
-  console.log('No files to process');
-  process.exit(1);
-}
-
-toProcessArr.forEach(({ input, output }) => {
-  // eslint-disable-next-line no-console
-  console.log(`Generating: ${output}`);
-  const blocks = parseFileToBlocks(input);
-
-  const dom = createDocument({
-    // This will will either spread false (does nothing) or the object with title
-    ...(blocks[0].type === 'title' && { title: blocks[0].content[0] }),
-    blocks,
-  });
-
-  writeFile({ output, content: serializeDom(dom) });
-});

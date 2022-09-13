@@ -3,7 +3,12 @@ const fs = require('fs');
 const glob = require('glob-promise');
 
 const destroypath = dir => {
-  if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true });
+  if (!fs.existsSync(dir)) return;
+
+  if (fs.lstatSync(dir).isFile())
+    throw new Error('The provided output path is a file');
+
+  fs.rmSync(dir, { recursive: true });
 };
 
 const generateFileListFromPath = ({ inputPath, outputPath }) => {
