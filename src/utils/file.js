@@ -1,7 +1,10 @@
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob-promise');
+<<<<<<< HEAD
 const { resolve } = require('path');
+=======
+>>>>>>> 51527bfe0d962dc893fac7c29e7ceb268f66b5ca
 
 const destroypath = dir => {
   if (!fs.existsSync(dir)) return;
@@ -18,9 +21,15 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
   if (fs.lstatSync(inputPath).isFile()) {
     // It's a file
 
+<<<<<<< HEAD
     if (!inputPath.endsWith('.txt') && !inputPath.endsWith('.md'))
       throw new Error(
         'When specifying a single file, it needs to be a "txt" or "md" file'
+=======
+    if (!inputPath.endsWith('.txt'))
+      throw new Error(
+        'When specifying a single file, it needs to be a txt file'
+>>>>>>> 51527bfe0d962dc893fac7c29e7ceb268f66b5ca
       );
 
     const filename = path.basename(inputPath);
@@ -28,10 +37,14 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
       {
         input: path.resolve(inputPath),
         output: path.resolve(
+<<<<<<< HEAD
           path.join(
             outputPath,
             filename.replace(path.extname(filename), '.html')
           )
+=======
+          path.join(outputPath, filename.replace(/\.txt$/, '.html'))
+>>>>>>> 51527bfe0d962dc893fac7c29e7ceb268f66b5ca
         ),
       },
     ];
@@ -39,6 +52,7 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
 
   // It's a folder
   // Let's look up all the txt files recursively ... This returns relative urls
+<<<<<<< HEAD
   return glob.sync(path.join(inputPath, '/**/*')).map(item => {
     //Issue 6: Adding an or condition for the markdown extension
     if (
@@ -63,6 +77,19 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
         output: '',
       };
     }
+=======
+  return glob.sync(path.join(inputPath, '/**/*.txt')).map(item => {
+    return {
+      // Let's generate an absolute path for the input file
+      input: path.resolve(item),
+      // Combine the absolute path of the output folder with the
+      // relative (compared to the path provided by the user) path of the input
+      output: path.join(
+        path.resolve(outputPath),
+        path.relative(inputPath, item.replace(/\.txt$/, '.html'))
+      ),
+    };
+>>>>>>> 51527bfe0d962dc893fac7c29e7ceb268f66b5ca
   });
 };
 
