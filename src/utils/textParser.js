@@ -14,7 +14,7 @@ const parseFileToBlocks = input => {
     if (!blockContent[0]) continue;
 
     // Collect all following lines that are not empty into the blockContent variable
-    while (lines[0]) {
+    while (lines[0]?.match(/\w/)) {
       blockContent.push(lines.shift());
     }
 
@@ -37,13 +37,13 @@ const parseFileToBlocks = input => {
     } else if (blockContent[0][0] === '#' && blockContent[0][1] === '#') {
       blockContent[0] = blockContent[0].replace('##', '');
       blocks.push({ type: 'h2', content: blockContent });
-    } else if (blockContent[0]?.match(/^=+$/)) {
+    } else if (lines[0]?.match(/^=+$/)) {
       // The next line is wholey composed of "=" characters
       // Drop the next line
       lines.shift();
       // Save the block
       blocks.push({ type: 'h1', content: blockContent });
-    } else if (blockContent[0]?.match(/^-+$/)) {
+    } else if (lines[0]?.match(/^-+$/)) {
       // The next line is wholey composed of "-" characters
       // Drop the next line
       lines.shift();
