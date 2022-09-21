@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob-promise');
-const { resolve } = require('path');
 
 const destroypath = dir => {
   if (!fs.existsSync(dir)) return;
@@ -39,30 +38,17 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
 
   // It's a folder
   // Let's look up all the txt files recursively ... This returns relative urls
-  return glob.sync(path.join(inputPath, '/**/*')).map(item => {
-    //Issue 6: Adding an or condition for the markdown extension
-    if (
-      path.basename(item).endsWith('.txt') ||
-      path.basename(item).endsWith('.md')
-    ) {
-      return {
-        // Let's generate an absolute path for the input file
-        input: path.resolve(item),
-        // Combine the absolute path of the output folder with the
-        // relative (compared to the path provided by the user) path of the input
-        output: path.join(
-          path.resolve(outputPath),
-          path.relative(inputPath, item.replace(path.extname(item), '.html'))
-        ),
-      };
-    }
-    //Issue 6: Returns blank if file is neither text or markdown
-    else {
-      return {
-        input: '',
-        output: '',
-      };
-    }
+  return glob.sync(path.join(inputPath, '/**/*.{txt,md}')).map(item => {
+    return {
+      // Let's generate an absolute path for the input file
+      input: path.resolve(item),
+      // Combine the absolute path of the output folder with the
+      // relative (compared to the path provided by the user) path of the input
+      output: path.join(
+        path.resolve(outputPath),
+        path.relative(inputPath, item.replace(path.extname(item), '.html'))
+      ),
+    };
   });
 };
 

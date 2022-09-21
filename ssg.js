@@ -62,18 +62,15 @@ try {
   toProcessArr.forEach(({ input, output }) => {
     // eslint-disable-next-line no-console
 
-    //Issue 6: Adding a condition to prevent writing on non markdown or text files
-    if (input != '') {
-      console.log(`Generating: ${output}`);
-      const blocks = parseFileToBlocks(input);
+    console.log(`Generating: ${output}`);
+    const blocks = parseFileToBlocks(input);
 
-      const dom = createDocument({
-        // This will will either spread false (does nothing) or the object with title
-        ...(blocks[0].type === 'title' && { title: blocks[0].content[0] }),
-        blocks,
-      });
-      writeFile({ output, content: serializeDom(dom) });
-    }
+    const dom = createDocument({
+      // This will will either spread false (does nothing) or the object with title
+      ...(blocks[0].type === 'title' && { title: blocks[0].content[0] }),
+      blocks,
+    });
+    writeFile({ output, content: serializeDom(dom) });
   });
 } catch (e) {
   // eslint-disable-next-line no-console
