@@ -31,4 +31,5 @@ Static site generator for OSD600-NSA
 
 - No. 1, Parsing title
 - No. 2, specify output directory
-- No. 4, handle recursive structure
+- No. 3, handle recursive structure
+- No. 4, handle markdown files

@@ -61,6 +61,7 @@ try {
 
   toProcessArr.forEach(({ input, output }) => {
     // eslint-disable-next-line no-console
+
     console.log(`Generating: ${output}`);
     const blocks = parseFileToBlocks(input);
 
@@ -69,7 +70,6 @@ try {
       ...(blocks[0].type === 'title' && { title: blocks[0].content[0] }),
       blocks,
     });
-
     writeFile({ output, content: serializeDom(dom) });
   });
 } catch (e) {

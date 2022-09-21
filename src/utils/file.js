@@ -17,9 +17,9 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
   if (fs.lstatSync(inputPath).isFile()) {
     // It's a file
 
-    if (!inputPath.endsWith('.txt'))
+    if (!inputPath.endsWith('.txt') && !inputPath.endsWith('.md'))
       throw new Error(
-        'When specifying a single file, it needs to be a txt file'
+        'When specifying a single file, it needs to be a "txt" or "md" file'
       );
 
     const filename = path.basename(inputPath);
@@ -27,7 +27,10 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
       {
         input: path.resolve(inputPath),
         output: path.resolve(
-          path.join(outputPath, filename.replace(/\.txt$/, '.html'))
+          path.join(
+            outputPath,
+            filename.replace(path.extname(filename), '.html')
+          )
         ),
       },
     ];
@@ -35,7 +38,7 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
 
   // It's a folder
   // Let's look up all the txt files recursively ... This returns relative urls
-  return glob.sync(path.join(inputPath, '/**/*.txt')).map(item => {
+  return glob.sync(path.join(inputPath, '/**/*.{txt,md}')).map(item => {
     return {
       // Let's generate an absolute path for the input file
       input: path.resolve(item),
@@ -43,7 +46,7 @@ const generateFileListFromPath = ({ inputPath, outputPath }) => {
       // relative (compared to the path provided by the user) path of the input
       output: path.join(
         path.resolve(outputPath),
-        path.relative(inputPath, item.replace(/\.txt$/, '.html'))
+        path.relative(inputPath, item.replace(path.extname(item), '.html'))
       ),
     };
   });
