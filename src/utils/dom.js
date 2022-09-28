@@ -5,9 +5,9 @@
 
 const { DOMImplementation, XMLSerializer } = require('xmldom');
 
-const addBaseStructure = (document, { title }) => {
+const addBaseStructure = (document, { title, language }) => {
   const html = document.getElementsByTagName('html').item(0);
-  html.setAttribute('lang', 'en');
+  html.setAttribute('lang', language);
 
   const head = document.createElement('head');
   html.appendChild(head);
@@ -37,7 +37,7 @@ const addBodyContent = (document, { blocks }) => {
 
   // Loop through all the blocks and add them into the XML document
   blocks.forEach(({ type, content }) => {
-    //Issue 6: Adding a condition for the type that will be passed on the dom
+    // Issue 6: Adding a condition for the type that will be passed on the dom
     let typeVal;
     if (type === 'title') typeVal = 'h1';
     else if (type === 'h1') typeVal = 'h1';

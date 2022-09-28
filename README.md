@@ -18,6 +18,7 @@ Static site generator for OSD600-NSA
 | --------- | ----- | ----------------------------------------------------------------------------------------- |
 | --help    | -h    | Displays usage information                                                                |
 | --input   | -i    | Input file or folder. In case of folder will generate recursively, keeping file structure |
+| --lang    | -l    | Language to put into the html element                                                     |
 | --output  | -o    | Puts generated file(s) into directory **Original directory is destroyed**                 |
 | --version | -v    | Print version info and exit                                                               |
 
@@ -26,10 +27,16 @@ Static site generator for OSD600-NSA
 - `node ./ssg.js --input ./inputs/`
 - `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/`
 - `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder`
+- `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder -l en-US`
 
 ## Optional features developed:
 
+### For r0.1
+
 - No. 1, Parsing title
 - No. 2, specify output directory
-- No. 3, handle recursive structure
-- No. 4, handle markdown files
+- No. 4, handle recursive structure
+
+### For Lab3
+
+- No. 1, lang support

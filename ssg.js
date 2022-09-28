@@ -46,7 +46,8 @@ if (!config.parsedParams.input) {
   process.exit(1);
 }
 
-const outputDirPath = config.parsedParams.output || DEFAULT_RESULT_FOLDER;
+const { language = 'en-CA', output: outputDirPath = DEFAULT_RESULT_FOLDER } =
+  config.parsedParams;
 
 try {
   // Destroy output dir if exists
@@ -61,14 +62,15 @@ try {
 
   toProcessArr.forEach(({ input, output }) => {
     // eslint-disable-next-line no-console
-
     console.log(`Generating: ${output}`);
+
     const blocks = parseFileToBlocks(input);
 
     const dom = createDocument({
       // This will will either spread false (does nothing) or the object with title
       ...(blocks[0].type === 'title' && { title: blocks[0].content[0] }),
       blocks,
+      language,
     });
     writeFile({ output, content: serializeDom(dom) });
   });
