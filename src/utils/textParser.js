@@ -31,13 +31,7 @@ const parseFileToBlocks = input => {
       continue;
     }
 
-    if (blockContent[0][0] === '#' && blockContent[0][1] !== '#') {
-      blockContent[0] = blockContent[0].replace('#', '');
-      blocks.push({ type: 'h1', content: blockContent });
-    } else if (blockContent[0][0] === '#' && blockContent[0][1] === '#') {
-      blockContent[0] = blockContent[0].replace('##', '');
-      blocks.push({ type: 'h2', content: blockContent });
-    } else if (lines[0]?.match(/^=+$/)) {
+    if (lines[0]?.match(/^=+$/)) {
       // The next line is wholey composed of "=" characters
       // Drop the next line
       lines.shift();
