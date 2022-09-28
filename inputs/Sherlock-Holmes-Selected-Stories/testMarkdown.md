@@ -3,8 +3,3 @@ Testing
 
 Testing
 ----------
-
-
-# Testing
-
-## Testing
