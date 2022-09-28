@@ -42,13 +42,14 @@ const addBodyContent = (document, { blocks }) => {
     if (type === 'title') typeVal = 'h1';
     else if (type === 'h1') typeVal = 'h1';
     else if (type === 'h2') typeVal = 'h2';
+    else if (type === 'hr') typeVal = 'hr';
     else typeVal = 'p';
 
     const containerEl = document.createElement(typeVal);
     body.appendChild(containerEl);
 
     // Add each line one by one
-    content.forEach((line, index) => {
+    content?.forEach?.((line, index) => {
       if (index) {
         const brEl = document.createElement('br');
         containerEl.appendChild(brEl);

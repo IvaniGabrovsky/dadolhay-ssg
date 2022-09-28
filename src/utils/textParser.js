@@ -13,6 +13,13 @@ const parseFileToBlocks = input => {
     // In case the file starts with \n
     if (!blockContent[0]) continue;
 
+    // In case it's a hr block
+    if (blockContent[0] === '---') {
+      // IT's a **STANDALONE** line of three dashes so adding a hr is in order
+      blocks.push({ type: 'hr' });
+      continue;
+    }
+
     // Collect all following lines that are not empty into the blockContent variable
     while (lines[0]?.match(/\w/)) {
       blockContent.push(lines.shift());
@@ -31,6 +38,7 @@ const parseFileToBlocks = input => {
       continue;
     }
 
+    // Determine block type based on the next line
     if (lines[0]?.match(/^=+$/)) {
       // The next line is wholey composed of "=" characters
       // Drop the next line

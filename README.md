@@ -40,3 +40,4 @@ Static site generator for OSD600-NSA
 ### For Lab3
 
 - No. 1, lang support
+- No. 4, add HR support
