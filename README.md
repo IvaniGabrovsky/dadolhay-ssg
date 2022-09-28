@@ -33,3 +33,7 @@ Static site generator for OSD600-NSA
 - No. 2, specify output directory
 - No. 3, handle recursive structure
 - No. 4, handle markdown files
+
+### Features for Lab3
+
+- No. 4, add HR support

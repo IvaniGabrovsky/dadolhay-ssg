@@ -61,8 +61,8 @@ try {
 
   toProcessArr.forEach(({ input, output }) => {
     // eslint-disable-next-line no-console
-
     console.log(`Generating: ${output}`);
+
     const blocks = parseFileToBlocks(input);
 
     const dom = createDocument({

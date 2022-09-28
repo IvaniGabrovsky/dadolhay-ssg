@@ -37,18 +37,19 @@ const addBodyContent = (document, { blocks }) => {
 
   // Loop through all the blocks and add them into the XML document
   blocks.forEach(({ type, content }) => {
-    //Issue 6: Adding a condition for the type that will be passed on the dom
+    // Issue 6: Adding a condition for the type that will be passed on the dom
     let typeVal;
     if (type === 'title') typeVal = 'h1';
     else if (type === 'h1') typeVal = 'h1';
     else if (type === 'h2') typeVal = 'h2';
+    else if (type === 'hr') typeVal = 'hr';
     else typeVal = 'p';
 
     const containerEl = document.createElement(typeVal);
     body.appendChild(containerEl);
 
     // Add each line one by one
-    content.forEach((line, index) => {
+    content?.forEach?.((line, index) => {
       if (index) {
         const brEl = document.createElement('br');
         containerEl.appendChild(brEl);
