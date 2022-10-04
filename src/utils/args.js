@@ -1,3 +1,4 @@
+const path = require('path');
 /**
  * This Fn is responsible for parsing the arguments given to this script
  *
@@ -89,4 +90,19 @@ const printArgsUsage = ({ options }) => {
     });
 };
 
-module.exports = { parseProcArgs, printArgsUsage };
+const parseConfigArgs = (configFile ) => {
+  const PATH_PREFIX = '../../'
+  try{
+    // load json file using require
+    const {input, output, lang} = require(path.join(PATH_PREFIX, configFile));
+    return { parsedParams: {
+      input, output, ...(lang && {language: lang } )
+    }}
+  } catch(err){
+    // file does not exist or it is not a json file
+    console.log('Config file does not exist or is not correct JSON file.');
+    process.exit(1);
+  }
+}
+
+module.exports = { parseProcArgs, printArgsUsage, parseConfigArgs };
