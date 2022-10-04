@@ -90,19 +90,27 @@ const printArgsUsage = ({ options }) => {
     });
 };
 
-const parseConfigArgs = (configFile ) => {
-  const PATH_PREFIX = '../../'
-  try{
+const parseConfigArgs = configFile => {
+  const PATH_PREFIX = '../../';
+  try {
     // load json file using require
-    const {input, output, lang} = require(path.join(PATH_PREFIX, configFile));
-    return { parsedParams: {
-      input, output, ...(lang && {language: lang } )
-    }}
-  } catch(err){
+    const configPath = path.join(PATH_PREFIX, configFile);
+    // eslint-disable-next-line import/no-dynamic-require
+    const { input, output, lang } = require(`${configPath}`); // eslint-disable-line global-require
+    return {
+      parsedParams: {
+        input,
+        output,
+        ...(lang && { language: lang }),
+      },
+    };
+  } catch (err) {
     // file does not exist or it is not a json file
+    // eslint-disable-next-line
     console.log('Config file does not exist or is not correct JSON file.');
     process.exit(1);
   }
-}
+  return {};
+};
 
 module.exports = { parseProcArgs, printArgsUsage, parseConfigArgs };

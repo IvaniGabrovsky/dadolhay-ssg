@@ -2,7 +2,11 @@
 
 const { parseFileToBlocks } = require('./src/utils/textParser');
 const { createDocument, serializeDom } = require('./src/utils/dom');
-const { parseProcArgs, printArgsUsage, parseConfigArgs } = require('./src/utils/args');
+const {
+  parseProcArgs,
+  printArgsUsage,
+  parseConfigArgs,
+} = require('./src/utils/args');
 const {
   destroypath,
   generateFileListFromPath,
@@ -42,14 +46,15 @@ if (config.parsedParams.help) {
 // Verify input or config is given
 let outputDirPath = DEFAULT_RESULT_FOLDER;
 let language = 'en-CA';
-if(config.parsedParams.input) {
+if (config.parsedParams.input) {
   language = config.parsedParams.language || language;
   outputDirPath = config.parsedParams.output || outputDirPath;
-} else if(config.parsedParams.config) {
-  config = parseConfigArgs(config.parsedParams.config)
+} else if (config.parsedParams.config) {
+  config = parseConfigArgs(config.parsedParams.config);
   language = config.parsedParams.language || language;
   outputDirPath = config.parsedParams.output || outputDirPath;
 } else {
+  // eslint-disable-next-line
   console.log('Input or config parameter missing');
   process.exit(1);
 }
