@@ -29,7 +29,7 @@ Static site generator for OSD600-NSA
 - `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/`
 - `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder`
 - `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder -l en-US`
-- `node ./ssg.js --config src/config/default_config.json`
+- `node ./ssg.js --config ./src/config/default_config.json`
 
 ## Optional features developed:
 
