@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 /**
  * This Fn is responsible for parsing the arguments given to this script
  *
@@ -91,12 +92,17 @@ const printArgsUsage = ({ options }) => {
 };
 
 const parseConfigArgs = configFile => {
-  const PATH_PREFIX = '../../';
   try {
-    // load json file using require
-    const configPath = path.join(PATH_PREFIX, configFile);
-    // eslint-disable-next-line import/no-dynamic-require
-    const { input, output, lang } = require(`${configPath}`); // eslint-disable-line global-require
+    // check if file exist
+    if (!fs.existsSync(path.resolve(configFile))) {
+      // eslint-disable-next-line
+      console.log('Config file does not exist.');
+      process.exit(1);
+    }
+    // load json file
+    const data = fs.readFileSync('./src/config/default_config.json', 'utf8');
+    // stringfy file content to object
+    const { input, output, lang } = JSON.stringify(data);
     return {
       parsedParams: {
         input,
