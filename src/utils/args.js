@@ -100,16 +100,9 @@ const parseConfigArgs = configFile => {
       process.exit(1);
     }
     // load json file
-    const data = fs.readFileSync('./src/config/default_config.json', 'utf8');
-    // stringfy file content to object
-    const { input, output, lang } = JSON.stringify(data);
-    return {
-      parsedParams: {
-        input,
-        output,
-        ...(lang && { language: lang }),
-      },
-    };
+    const data = fs.readFileSync(configFile, 'utf8');
+    
+    return { parsedParams: JSON.parse(data) };
   } catch (err) {
     // file does not exist or it is not a json file
     // eslint-disable-next-line
