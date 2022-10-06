@@ -43,28 +43,28 @@ if (config.parsedParams.help) {
  * At this point we know that we will have do do the work
  */
 
-// Verify input or config is given
-let outputDirPath = DEFAULT_RESULT_FOLDER;
-let language = 'en-CA';
-if (config.parsedParams.input) {
-  language = config.parsedParams.language || language;
-  outputDirPath = config.parsedParams.output || outputDirPath;
-} else if (config.parsedParams.config) {
-  config = parseConfigArgs(config.parsedParams.config);
-  language = config.parsedParams.language || language;
-  outputDirPath = config.parsedParams.output || outputDirPath;
-} else {
-  // eslint-disable-next-line
-  console.log('Input or config parameter missing');
+let { parsedParams } = config;
+if (parsedParams.config) {
+  parsedParams = {
+    ...parsedParams,
+    ...parseConfigArgs(config.parsedParams.config).parsedParams,
+  };
+}
+// Verify input is given
+if (!parsedParams.input) {
+  // eslint-disable-next-line no-console
+  console.log('Input parameter missing');
   process.exit(1);
 }
+const { language = 'en-CA', output: outputDirPath = DEFAULT_RESULT_FOLDER } =
+  parsedParams;
 
 try {
   // Destroy output dir if exists
   destroypath(outputDirPath);
 
   const toProcessArr = generateFileListFromPath({
-    inputPath: config.parsedParams.input,
+    inputPath: parsedParams.input,
     outputPath: outputDirPath,
   });
 
