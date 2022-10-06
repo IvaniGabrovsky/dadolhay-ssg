@@ -2,7 +2,11 @@
 
 const { parseFileToBlocks } = require('./src/utils/textParser');
 const { createDocument, serializeDom } = require('./src/utils/dom');
-const { parseProcArgs, printArgsUsage } = require('./src/utils/args');
+const {
+  parseProcArgs,
+  printArgsUsage,
+  parseConfigArgs,
+} = require('./src/utils/args');
 const {
   destroypath,
   generateFileListFromPath,
@@ -39,22 +43,28 @@ if (config.parsedParams.help) {
  * At this point we know that we will have do do the work
  */
 
+let { parsedParams } = config;
+if (parsedParams.config) {
+  parsedParams = {
+    ...parsedParams,
+    ...parseConfigArgs(config.parsedParams.config).parsedParams,
+  };
+}
 // Verify input is given
-if (!config.parsedParams.input) {
+if (!parsedParams.input) {
   // eslint-disable-next-line no-console
   console.log('Input parameter missing');
   process.exit(1);
 }
-
 const { language = 'en-CA', output: outputDirPath = DEFAULT_RESULT_FOLDER } =
-  config.parsedParams;
+  parsedParams;
 
 try {
   // Destroy output dir if exists
   destroypath(outputDirPath);
 
   const toProcessArr = generateFileListFromPath({
-    inputPath: config.parsedParams.input,
+    inputPath: parsedParams.input,
     outputPath: outputDirPath,
   });
 

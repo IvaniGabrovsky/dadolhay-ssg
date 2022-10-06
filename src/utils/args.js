@@ -1,3 +1,5 @@
+const path = require('path');
+const fs = require('fs');
 /**
  * This Fn is responsible for parsing the arguments given to this script
  *
@@ -89,4 +91,25 @@ const printArgsUsage = ({ options }) => {
     });
 };
 
-module.exports = { parseProcArgs, printArgsUsage };
+const parseConfigArgs = configFile => {
+  try {
+    // check if file exist
+    if (!fs.existsSync(path.resolve(configFile))) {
+      // eslint-disable-next-line
+      console.log('Config file does not exist.');
+      process.exit(1);
+    }
+    // load json file
+    const data = fs.readFileSync(configFile, 'utf8');
+    
+    return { parsedParams: JSON.parse(data) };
+  } catch (err) {
+    // file does not exist or it is not a json file
+    // eslint-disable-next-line
+    console.log('Config file does not exist or is not correct JSON file.');
+    process.exit(1);
+  }
+  return {};
+};
+
+module.exports = { parseProcArgs, printArgsUsage, parseConfigArgs };

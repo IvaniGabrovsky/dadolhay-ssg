@@ -29,6 +29,13 @@ const options = {
     hasValue: false,
     description: 'Print version and exir',
   },
+  config: {
+    long: 'config',
+    short: 'c',
+    hasValue: true,
+    description: 'Get all SSG options from JSON formatted configuration file',
+  },
+
 };
 
 module.exports = options;

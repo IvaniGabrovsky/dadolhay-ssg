@@ -21,6 +21,7 @@ Static site generator for OSD600-NSA
 | --lang    | -l    | Language to put into the html element                                                     |
 | --output  | -o    | Puts generated file(s) into directory **Original directory is destroyed**                 |
 | --version | -v    | Print version info and exit                                                               |
+| --config  | -c    | Run ssg using configuration file |
 
 ## Examples
 
@@ -28,6 +29,7 @@ Static site generator for OSD600-NSA
 - `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/`
 - `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder`
 - `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder -l en-US`
+- `node ./ssg.js --config ./src/config/default_config.json`
 
 ## Optional features developed:
 
