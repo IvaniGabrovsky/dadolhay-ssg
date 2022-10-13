@@ -21,7 +21,7 @@ Static site generator for OSD600-NSA
 | --lang    | -l    | Language to put into the html element                                                     |
 | --output  | -o    | Puts generated file(s) into directory **Original directory is destroyed**                 |
 | --version | -v    | Print version info and exit                                                               |
-| --config  | -c    | Run ssg using configuration file |
+| --config  | -c    | Run ssg using configuration file                                                          |
 
 ## Examples
 
