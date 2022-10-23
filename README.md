@@ -4,7 +4,7 @@ Static site generator for OSD600-NSA
 
 ## Requirements
 
-- `Node` V16 or V18
+- `Node` V18
 - `Yarn` V1
 
 ## Usage

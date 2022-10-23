@@ -1,6 +1,6 @@
-const path = require('path');
-const fs = require('fs');
-const glob = require('glob-promise');
+import path from 'path';
+import fs from 'fs';
+import glob from 'glob-promise';
 
 const destroypath = dir => {
   if (!fs.existsSync(dir)) return;
@@ -60,4 +60,4 @@ const writeFile = ({ output, content }) => {
   fs.writeFileSync(output, content);
 };
 
-module.exports = { destroypath, generateFileListFromPath, writeFile };
+export { destroypath, generateFileListFromPath, writeFile };

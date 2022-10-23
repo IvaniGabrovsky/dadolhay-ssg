@@ -1,5 +1,6 @@
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
+
 /**
  * This Fn is responsible for parsing the arguments given to this script
  *
@@ -109,4 +110,4 @@ const parseConfigArgs = configFile => {
   }
 };
 
-module.exports = { parseProcArgs, printArgsUsage, parseConfigArgs };
+export { parseProcArgs, printArgsUsage, parseConfigArgs };

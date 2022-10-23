@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
-const { parseFileToBlocks } = require('./src/utils/textParser');
-const { createDocument, serializeDom } = require('./src/utils/dom');
-const {
+import process from './src/utils/processor/processor.js';
+import { wrapDom } from './src/utils/dom.js';
+import {
   parseProcArgs,
   printArgsUsage,
   parseConfigArgs,
-} = require('./src/utils/args');
-const {
+} from './src/utils/args.js';
+import {
   destroypath,
   generateFileListFromPath,
   writeFile,
-} = require('./src/utils/file');
-const options = require('./src/constants/options');
-const packageJson = require('./package.json');
+} from './src/utils/file.js';
+import options from './src/constants/options.js';
+import packageJson from './package.json' assert { type: 'json' };
 
 const DEFAULT_RESULT_FOLDER = 'dist';
 const DEFAULT_LANGUAGE = 'en-CA';
@@ -71,15 +71,9 @@ try {
     // eslint-disable-next-line no-console
     console.log(`Generating: ${output}`);
 
-    const blocks = parseFileToBlocks(input);
+    const { body, title } = process(input);
 
-    const dom = createDocument({
-      // This will will either spread false (does nothing) or the object with title
-      ...(blocks[0].type === 'title' && { title: blocks[0].content[0] }),
-      blocks,
-      language,
-    });
-    writeFile({ output, content: serializeDom(dom) });
+    writeFile({ output, content: wrapDom({ title, body, language }) });
   });
 } catch (e) {
   // eslint-disable-next-line no-console

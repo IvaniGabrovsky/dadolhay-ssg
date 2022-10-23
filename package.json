@@ -1,5 +1,6 @@
 {
   "name": "dadolhay-ssg",
+  "type": "module",
   "version": "0.0.1",
   "description": "OSD600-NSA Release 0.0.1",
   "main": "index.js",
@@ -17,7 +18,7 @@
   },
   "homepage": "https://github.com/dadolhay/dadolhay-ssg#readme",
   "devDependencies": {
-    "eslint": "^8.23.0",
+    "eslint": "^8.26.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-flowtype": "^8.0.3",
@@ -25,10 +26,10 @@
     "prettier": "^2.7.1"
   },
   "engines": {
-    "node": "^16 || ^18"
+    "node": "^18"
   },
   "dependencies": {
     "glob-promise": "^5.0.0",
-    "xmldom": "^0.6.0"
+    "micromark": "^3.1.0"
   }
 }

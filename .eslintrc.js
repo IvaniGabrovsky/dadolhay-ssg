@@ -11,6 +11,7 @@ module.exports = {
     'arrow-body-style': ['off'],
     'new-cap': ['off'],
     'no-continue': ['off'],
+    'import/extensions': ['off'],
   },
   env: { es2022: true, node: true },
 };

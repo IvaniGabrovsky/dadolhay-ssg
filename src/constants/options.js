@@ -35,7 +35,6 @@ const options = {
     hasValue: true,
     description: 'Get all SSG options from JSON formatted configuration file',
   },
-
 };
 
-module.exports = options;
+export default options;
