@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "codeandstuff.package-json-upgrade",
+    "ms-vscode.vscode-typescript-next",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}

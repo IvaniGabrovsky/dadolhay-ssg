@@ -5,7 +5,8 @@
   "description": "OSD600-NSA Release 0.0.1",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier --write \"./**/*.{md,js,json,html,css}\"",
+    "lint": "eslint --fix \"**/*.{js,jsx,ts,tsx}\" --fix-type problem"
   },
   "repository": {
     "type": "git",

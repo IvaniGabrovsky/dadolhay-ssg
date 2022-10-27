@@ -13,7 +13,6 @@ import {
   writeFile,
 } from './src/utils/file.js';
 import options from './src/constants/options.js';
-import packageJson from './package.json' assert { type: 'json' };
 
 const DEFAULT_RESULT_FOLDER = 'dist';
 const DEFAULT_LANGUAGE = 'en-CA';
@@ -24,8 +23,9 @@ try {
 
   // Version
   if (config.parsedParams.version) {
+    // TODO FIXME get this from package.json once eslint supports "assert"
     // eslint-disable-next-line no-console
-    console.log(`${packageJson.name} - v${packageJson.version}`);
+    console.log(`dadolhay-ssg - v0.0.1`);
     process.exit();
   }
 
