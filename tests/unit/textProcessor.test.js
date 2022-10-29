@@ -7,13 +7,13 @@ import textProcessor from '../../src/utils/processor/textProcessor';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const testFileName = path.join(
-  __dirname,
-  '../../inputs/Sherlock-Holmes-Selected-Stories/Silver Blaze.txt'
-);
-
 describe('text processor', () => {
   test('process text file to internal structure', () => {
+    const testFileName = path.join(
+      __dirname,
+      '../../inputs/Sherlock-Holmes-Selected-Stories/Silver Blaze.txt'
+    );
+
     expect(textProcessor(testFileName)).toMatchSnapshot();
   });
 });

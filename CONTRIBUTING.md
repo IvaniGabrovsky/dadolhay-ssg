@@ -1,7 +1,6 @@
 ## Requirements
 
 - `Node` V18
-- `Yarn` V1
 
 ## Editor plugins required for code compliance
 
@@ -14,8 +13,8 @@ We are currently using `jest`, generating and maintaining snapshot tests
 
 ## Scripts
 
-- `yarn run format` - Runs Prettier against the entire codebase
-- `yarn run lint` - Runs Eslint against the entire codebase
-- `yarn run test` - Tuns jest unit test suite
-- `yarn run test:watch` - Tuns jest unit test suite in watch mode
-- `yarn run coverage` - Tuns jest unit test suite generating test coverage output
+- `npm run format` - Runs Prettier against the entire codebase
+- `npm run lint` - Runs Eslint against the entire codebase
+- `npm run test` - Tuns jest unit test suite
+- `npm run test:watch` - Tuns jest unit test suite in watch mode
+- `npm run coverage` - Tuns jest unit test suite generating test coverage output

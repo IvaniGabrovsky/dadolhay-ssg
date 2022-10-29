@@ -5,11 +5,10 @@ Static site generator for OSD600-NSA
 ## Requirements
 
 - `Node` V18
-- `Yarn` V1
 
 ## Usage
 
-- Run `yarn install` first
+- Run `npm install` first
 - execute `./ssg.js [options]` or on windows you may need to prefix it with the interpreter, like `node ./ssg.js [options]`
 
 ## Options
