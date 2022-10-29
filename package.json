@@ -5,6 +5,9 @@
   "description": "OSD600-NSA Release 0.0.1",
   "main": "index.js",
   "scripts": {
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest -c jest.config.js --runInBand --watch --",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest -c jest.config.js --runInBand --",
+    "coverage": "NODE_OPTIONS=--experimental-vm-modules jest -c jest.config.js --runInBand --coverage",
     "format": "prettier --write \"./**/*.{md,js,json,html,css}\"",
     "lint": "eslint --fix \"**/*.{js,jsx,ts,tsx}\" --fix-type problem"
   },
@@ -24,6 +27,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-import": "^2.26.0",
+    "jest": "^29.2.2",
     "prettier": "^2.7.1"
   },
   "engines": {

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MD processor process MD file to internal structure 1`] = `
+{
+  "body": "<h1>Testing</h1>
+<hr />
+<h2>Testing</h2>
+<pre><code class="language-js">  const foo = &quot;bar&quot;
+</code></pre>",
+}
+`;

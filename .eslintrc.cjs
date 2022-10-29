@@ -13,5 +13,9 @@ module.exports = {
     'no-continue': ['off'],
     'import/extensions': ['off'],
   },
-  env: { es2022: true, node: true },
+  env: {
+    es2022: true,
+    node: true,
+    jest: true,
+  },
 };
