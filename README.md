@@ -8,8 +8,7 @@ Static site generator for OSD600-NSA
 
 ## Usage
 
-- Run `npm install` first
-- execute `./ssg.js [options]` or on windows you may need to prefix it with the interpreter, like `node ./ssg.js [options]`
+- Package can be run through `npx`
 
 ## Options
 
@@ -24,21 +23,8 @@ Static site generator for OSD600-NSA
 
 ## Examples
 
-- `node ./ssg.js --input ./inputs/`
-- `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/`
-- `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder`
-- `node ./ssg.js --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder -l en-US`
-- `node ./ssg.js --config ./src/config/default_config.json`
-
-## Optional features developed:
-
-### For r0.1
-
-- No. 1, Parsing title
-- No. 2, specify output directory
-- No. 4, handle recursive structure
-
-### For Lab3
-
-- No. 1, lang support
-- No. 4, add HR support
+- `npx @dadolhay/ssg --input ./inputs/`
+- `npx @dadolhay/ssg --input ./inputs/Sherlock-Holmes-Selected-Stories/`
+- `npx @dadolhay/ssg --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder`
+- `npx @dadolhay/ssg --input ./inputs/Sherlock-Holmes-Selected-Stories/ -o ./outputFolder -l en-US`
+- `npx @dadolhay/ssg --config ./src/config/default_config.json`

@@ -1,44 +1,23 @@
 #!/usr/bin/env node
 
-import process from './src/utils/processor/processor.js';
-import { wrapDom } from './src/utils/dom.js';
+import process from '../src/utils/processor/processor.js';
+import { wrapDom } from '../src/utils/dom.js';
 import {
   parseProcArgs,
   printArgsUsage,
   parseConfigArgs,
-} from './src/utils/args.js';
+} from '../src/utils/args.js';
 import {
   destroypath,
   generateFileListFromPath,
   writeFile,
-} from './src/utils/file.js';
-import options from './src/constants/options.js';
+} from '../src/utils/file.js';
+import options from '../src/constants/options.js';
 
 const DEFAULT_RESULT_FOLDER = 'dist';
 const DEFAULT_LANGUAGE = 'en-CA';
 
-let config;
-try {
-  config = parseProcArgs({ options });
-
-  // Version
-  if (config.parsedParams.version) {
-    // TODO FIXME get this from package.json once eslint supports "assert"
-    // eslint-disable-next-line no-console
-    console.log(`dadolhay-ssg - v0.0.1`);
-    process.exit();
-  }
-
-  // Help
-  if (config.parsedParams.help) {
-    printArgsUsage({ options });
-    process.exit();
-  }
-
-  /**
-   * At this point we know that we will have do do the work
-   */
-
+const run = config => {
   let { parsedParams } = config;
   if (parsedParams.config) {
     parsedParams = {
@@ -49,8 +28,7 @@ try {
   // Verify input is given
   if (!parsedParams.input) {
     // eslint-disable-next-line no-console
-    console.log('Input parameter missing');
-    process.exit(1);
+    throw new Error('Input parameter missing');
   }
   const {
     language = DEFAULT_LANGUAGE,
@@ -75,8 +53,23 @@ try {
 
     writeFile({ output, content: wrapDom({ title, body, language }) });
   });
+};
+
+let config;
+try {
+  config = parseProcArgs({ options });
+
+  // Version
+  if (config.parsedParams.version) {
+    // TODO FIXME get this from package.json once eslint supports "assert"
+    // eslint-disable-next-line no-console
+    console.log(`dadolhay-ssg - v0.0.1`);
+  } else if (config.parsedParams.help) {
+    printArgsUsage({ options });
+  } else {
+    run(config);
+  }
 } catch (e) {
   // eslint-disable-next-line no-console
   console.log(e.message);
-  process.exit(1);
 }
